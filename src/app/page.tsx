@@ -9,7 +9,7 @@ import { RiTodoLine } from "react-icons/ri";
 export default function Home() {
   return (
       <main className={styles.main}>
-          <h2><RiTodoLine className="icons"/> TODO NEXT + TYPESCRIPT <RiTodoLine className="icons"/></h2>
+          <h2><RiTodoLine className="icons"/>  SCHEDULE NEXT + TYPESCRIPT PROJECTS <RiTodoLine className="icons"/></h2>
           <Navbar/>
           <AddTodo/>
           <Todos/>

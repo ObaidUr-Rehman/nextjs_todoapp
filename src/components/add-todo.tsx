@@ -15,7 +15,7 @@ const AddTodo = () => {
     return (
         <form onSubmit={handleFormSubmit}>
             <input type="text"  placeholder="Write your todo" name=" " id=" " value={todo} onChange={(event) => setTodo(event.target.value)}/>
-            <button type="submit">Add Todo</button>
+            <button type="submit">Add TODOO</button>
         </form>
     );
 };
