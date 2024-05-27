@@ -1,0 +1,21 @@
+'use client'
+import React from 'react';
+import {useSearchParams} from "next/navigation";
+import Link from "next/link";
+
+const Navbar = () => {
+
+    const searchParams = useSearchParams();
+    const todosFilter = searchParams.get("todos");
+
+    return (
+        <nav>
+            <Link href="/" className={(todosFilter === null) ? "active" : ""}>All</Link>
+            <Link href="/?todos=active" className={todosFilter === 'active' ? "active" : ""} >Active</Link>
+            <Link href="/?todos=completed" className={todosFilter === 'completed' ? "active" : ""}>Completed</Link>
+
+        </nav>
+    );
+};
+
+export default Navbar;
