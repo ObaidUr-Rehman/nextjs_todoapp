@@ -92,7 +92,7 @@ form button{
   font-weight: bold;
   cursor: pointer;
   margin-left: 2.4rem;
-  background-color: #68B984;
+  background-color: #555555;
   color: #fff;
 }
 
@@ -138,4 +138,12 @@ label{
   cursor: pointer;
   justify-self: center;
   letter-spacing: .1rem;
+}
+
+.edit-btn {
+  background-color: #008CBA !important;
+}
+
+.save-btn {
+  background-color: #04AA6D !important;
 }

@@ -13,6 +13,7 @@ export type TodosContext = {
     handleAddTodo: (task: string) => void;  // call signature
     handleTodoDeleted: (id: string) => void;
     toggleTodoAsCompleted: (id: string) => void;
+    handleTodoUpdated: (updatedTask: Todo) => void;
 }
 
 export const todosContext = createContext<TodosContext | null>(null)
@@ -62,7 +63,7 @@ export const TodosProvider = ({children}: { children: ReactNode }) => {
     }
 
 
-    // if the task is deleted
+    // if the task is deleted then remove to do
 
     const handleTodoDeleted = (id: string) => {
         setTodos((prev) => {
@@ -72,9 +73,24 @@ export const TodosProvider = ({children}: { children: ReactNode }) => {
         })
     }
 
+    // if the task is updated so
+
+    const handleTodoUpdated = (updatedTask: Todo) => {
+        setTodos((prev) => {
+            const newTodos = prev.map((task) => {
+                if (task.id === updatedTask.id) {
+                    return { ...task, ...updatedTask };
+                }
+                return task;
+            });
+            localStorage.setItem("todos", JSON.stringify(newTodos));
+            return newTodos;
+        });
+    };
+
 
     return (
-        <todosContext.Provider value={{todos, handleAddTodo, toggleTodoAsCompleted, handleTodoDeleted}}>
+        <todosContext.Provider value={{todos, handleAddTodo, toggleTodoAsCompleted, handleTodoDeleted, handleTodoUpdated}}>
             {children}
         </todosContext.Provider>
     )
