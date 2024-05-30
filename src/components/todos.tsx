@@ -1,24 +1,29 @@
-"use client"
-import React, {useState} from 'react';
-import {useTodos, Todo} from "@/store/todos";
-import {useSearchParams} from "next/navigation";
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { useTodos, Todo } from "@/store/todos";
+import { useSearchParams } from "next/navigation";
 
 const Todos = () => {
+    const { todos, toggleTodoAsCompleted, handleTodoDeleted, handleTodoUpdated } = useTodos();
 
-    const {todos, toggleTodoAsCompleted, handleTodoDeleted, handleTodoUpdated } = useTodos()
-
-    const [isEditing, setIsEditing] = useState<string| null>(null)
+    const [isEditing, setIsEditing] = useState<string | null>(null);
     const [editTask, setEditTask] = useState<{ id: string, task: string }>({ id: '', task: '' });
 
     const searchParams = useSearchParams();
-    const todosFilter = searchParams.get('todos')
+    const todosFilter = searchParams.get('todos');
 
-    let filteredTodos = todos;
-    if (todosFilter === "active") {
-        filteredTodos = todos.filter((todo) => !todo.completed);
-    } else if (todosFilter === "completed") {
-        filteredTodos = todos.filter((todo) => todo.completed);
-    }
+    const [filteredTodos, setFilteredTodos] = useState<Todo[]>([]);
+
+    useEffect(() => {
+        let filtered = todos;
+        if (todosFilter === "active") {
+            filtered = todos.filter(todo => !todo.completed);
+        } else if (todosFilter === "completed") {
+            filtered = todos.filter(todo => todo.completed);
+        }
+        setFilteredTodos(filtered);
+    }, [todos, todosFilter]);
 
     const startEditing = (todo: Todo) => {
         setIsEditing(todo.id);
