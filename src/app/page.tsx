@@ -10,9 +10,9 @@ export default function Home() {
     return (
         <main>
             <h2><RiTodoLine className="icons"/> SCHEDULE NEXT + TYPESCRIPT PROJECT <RiTodoLine className="icons"/></h2>
+            <Suspense fallback={<div>Loading Todos...</div>}>
             <Navbar/>
             <AddTodo/>
-            <Suspense fallback={<div>Loading Todos...</div>}>
                 <Todos/>
             </Suspense>
         </main>
